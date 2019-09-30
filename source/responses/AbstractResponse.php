@@ -94,7 +94,7 @@ abstract class AbstractResponse
         if (\is_array($result)) {
             return $result;
         }
-        \Yii::error('Response from FCM is not valid. Response code = '.$responseObject->getStatusCode().'. Response info = '.(string) $responseObject->getBody()->getContents(), ErrorsHelper::INVALID_FCM_RESPONSE);
+        \Yii::info('Response from FCM is not valid. Response code = '.$responseObject->getStatusCode().'. Response info = '.(string) $responseObject->getBody()->getContents(), ErrorsHelper::INVALID_FCM_RESPONSE);
 
         throw new \ErrorException('Response from FCM is not valid. Look through logs for more info.');
     }

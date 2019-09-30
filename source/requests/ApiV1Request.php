@@ -58,7 +58,7 @@ class ApiV1Request extends AbstractRequest implements Request
      */
     public function setTarget(string $target, $value): Request
     {
-        $this->getOptionBuilder()->setTarget($target, (string) $value);
+        $this->getOptionBuilder()->setTarget($target, (string)$value);
 
         return $this;
     }
@@ -68,9 +68,9 @@ class ApiV1Request extends AbstractRequest implements Request
      *
      * @param array $data
      *
+     * @return self
      * @throws InvalidArgumentException
      *
-     * @return self
      */
     public function setData(array $data): Request
     {
@@ -152,10 +152,10 @@ class ApiV1Request extends AbstractRequest implements Request
         try {
             $responseObject = $this->getHttpClient()->request(self::POST, $this->getUrl(), $this->getRequestOptions());
         } catch (ClientException $e) {
-            \Yii::error(ErrorsHelper::getGuzzleClientExceptionMessage($e), ErrorsHelper::GUZZLE_HTTP_CLIENT);
+            \Yii::info(ErrorsHelper::getGuzzleClientExceptionMessage($e), ErrorsHelper::GUZZLE_HTTP_CLIENT);
             $responseObject = $e->getResponse();
         } catch (GuzzleException $e) {
-            \Yii::error(ErrorsHelper::getGuzzleExceptionMessage($e), ErrorsHelper::GUZZLE_HTTP_CLIENT);
+            \Yii::info(ErrorsHelper::getGuzzleExceptionMessage($e), ErrorsHelper::GUZZLE_HTTP_CLIENT);
             $responseObject = null;
         }
 
@@ -187,7 +187,7 @@ class ApiV1Request extends AbstractRequest implements Request
             return $this->getOptionBuilder()->getSubscriptionStatus() ? self::TOPIC_ADD_SUBSCRIPTION_URL : self::TOPIC_REMOVE_SUBSCRIPTION_URL;
         }
 
-        return self::SEND_MESSAGE_URL.$this->serviceAccount->getProjectId().self::SEND_MESSAGE_URL_PARAMS;
+        return self::SEND_MESSAGE_URL . $this->serviceAccount->getProjectId() . self::SEND_MESSAGE_URL_PARAMS;
     }
 
     /**
